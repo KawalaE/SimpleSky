@@ -1,0 +1,21 @@
+@font-face {
+    font-family: 'Poppins';
+    src: url('./assets/fonts/Poppins-Light.woff2') format('woff2'),
+      url('./assets/fonts/Poppins-Light.woff') format('woff');
+    font-style: normal;
+  }
+
+:root{
+  --primary-blue: #30a0e0;
+}
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', Arial, Helvetica, sans-serif;
+  font-size: 16px;
+}
+body{
+  min-height: 100vh;
+  background: linear-gradient(90deg, rgba(54,88,255,1) 0%, rgba(48,149,224,1) 41%, rgba(0,212,255,1) 100%);
+}
