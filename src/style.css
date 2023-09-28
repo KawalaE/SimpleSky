@@ -17,5 +17,14 @@
 }
 body{
   min-height: 100vh;
-  background: linear-gradient(90deg, rgba(54,88,255,1) 0%, rgba(48,149,224,1) 41%, rgba(0,212,255,1) 100%);
+  background: rgb(0,0,0);
+  background: rgb(0,0,0);
+  background: linear-gradient(41deg, rgba(0,0,0,1) 0%, rgba(40,41,43,1) 89%, rgba(52,58,60,1) 100%);
+  align-items: center;
+}
+.page{
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  margin-top: 200px;
 }
