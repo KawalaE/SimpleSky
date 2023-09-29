@@ -16,7 +16,7 @@
   font-size: 16px;
 }
 body{
-  min-height: 100vh;
+  height: 100vh;
   background: rgb(0,0,0);
   background: rgb(0,0,0);
   background: linear-gradient(41deg, rgba(0,0,0,1) 0%, rgba(40,41,43,1) 89%, rgba(52,58,60,1) 100%);
@@ -25,6 +25,53 @@ body{
 .page{
   display: flex;
   justify-content: center;
-  height: 100vh;
-  margin-top: 200px;
+  padding-top: 150px;
+}
+.search{
+  background-color: transparent;
+  width: 200px;
+  border: none;
+  color: white;
+}
+.search-container{
+  border: 1px solid white;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  width: 300px;
+  gap: 10px;
+  caret-color: white;
+}
+button.search{
+  width: 30px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+button.search img{
+  width: 20px;
+  transition: 0.2s ease-in-out;
+}
+.search-container input:focus{
+   outline: none;
+}
+.button-delete{
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.2s ease-in-out;
+}
+.button-delete img{
+  width: 20px;
+}
+.button-delete:active, button.search img:active{
+  transform: scale(80%);
 }
