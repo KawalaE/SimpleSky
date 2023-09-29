@@ -1,6 +1,6 @@
 import "../style.css";
 
-import CloudRain from "../assets/pictures/cloud.svg";
+import CloudRain from "../assets/pictures/weather-favicon.svg";
 import Magnifier from "../assets/pictures/magnifier.svg";
 import Delete from "../assets/pictures/delete.svg";
 
