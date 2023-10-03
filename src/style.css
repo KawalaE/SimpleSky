@@ -49,7 +49,7 @@ button.search{
   display: flex;
   align-items: center;
   justify-content: center;
-
+  outline: none;
 }
 button.search img{
   width: 20px;

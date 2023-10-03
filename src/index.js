@@ -1,5 +1,5 @@
 import createUI from "./modules/ui";
-import getSearchBarData from "./modules/logic";
+import searchBarHandler from "./modules/logic";
 
 createUI();
-getSearchBarData();
+searchBarHandler();
