@@ -1,5 +1,5 @@
 import createUI from "./modules/ui";
-import getWeather from "./modules/api";
+import getSearchBarData from "./modules/logic";
 
 createUI();
-getWeather();
+getSearchBarData();

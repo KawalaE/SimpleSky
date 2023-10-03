@@ -10,9 +10,9 @@ async function getLatLong(city) {
       const geoLocation = [latitude, longitude, timezone];
       return geoLocation;
     }
-    console.log("Server error");
+    return "Server error";
   } catch (error) {
-    console.log("Error", error);
+    return `Error ${error}`;
   }
 }
 
@@ -23,12 +23,12 @@ async function getWeather(latitude, longitude, timezone) {
   return data;
 }
 
-let coordinates = [];
-getLatLong("Kraków").then((data) => {
-  coordinates = data;
-  getWeather(coordinates[0], coordinates[1], coordinates[2]).then((data) => console.log(data));
-});
-
-export default function getForecast() {
-  console.log(getLatLong("Berlin"));
+export default function getForecast(cityName) {
+  let coordinates = [];
+  getLatLong(cityName).then((data) => {
+    coordinates = data;
+    getWeather(coordinates[0], coordinates[1], coordinates[2]).then(
+      (response) => console.log(response),
+    );
+  });
 }
