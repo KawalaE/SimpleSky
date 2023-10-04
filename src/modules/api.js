@@ -1,3 +1,5 @@
+import Weather from "./weather";
+
 async function getLatLong(city) {
   const url = `https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=10&timezone&language=en&format=json`;
   try {
@@ -22,13 +24,31 @@ async function getWeather(latitude, longitude, timezone) {
   const data = await response.json();
   return data;
 }
+function parseData(data) {
+  const forecast = [];
+  let singleDayWeather;
+  for (let i = 0; i <= 6; i++) {
+    singleDayWeather = new Weather(
+      data.daily.time[i],
+      data.daily.precipitation_probability_mean[i],
+      data.daily.rain_sum[i],
+      data.daily.snowfall_sum[i],
+      data.daily.temperature_2m_max[i],
+      data.daily.temperature_2m_min[i],
+      data.daily.weathercode[0],
+      data.daily.windspeed_10m_max[0],
+    );
+    forecast.push(singleDayWeather);
+  }
+  return forecast;
+}
 
 export default function getForecast(cityName) {
   let coordinates = [];
   getLatLong(cityName).then((data) => {
     coordinates = data;
     getWeather(coordinates[0], coordinates[1], coordinates[2]).then(
-      (response) => console.log(response),
+      (response) => console.log(parseData(response)),
     );
   });
 }
