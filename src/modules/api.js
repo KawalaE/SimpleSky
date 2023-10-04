@@ -45,10 +45,10 @@ function parseData(data) {
 
 export default function getForecast(cityName) {
   let coordinates = [];
-  getLatLong(cityName).then((data) => {
+  return getLatLong(cityName).then((data) => {
     coordinates = data;
-    getWeather(coordinates[0], coordinates[1], coordinates[2]).then(
-      (response) => console.log(parseData(response)),
+    return getWeather(coordinates[0], coordinates[1], coordinates[2]).then(
+      (response) => parseData(response),
     );
   });
 }

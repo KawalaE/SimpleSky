@@ -1,7 +1,16 @@
 import { getWMO } from "./logic";
 
 export default class Weather {
-  constructor(time, precipitation, rain, snowfall, temperatureMax, temperatureMin, weathercode, windspeed){
+  constructor(
+    time,
+    precipitation,
+    rain,
+    snowfall,
+    temperatureMax,
+    temperatureMin,
+    weathercode,
+    windspeed,
+  ) {
     this.time = time;
     this.precipitation = precipitation;
     this.rain = rain;

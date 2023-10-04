@@ -1,11 +1,14 @@
 import getForecast from "./api";
+import { displayForecast } from "./ui";
 
 export function searchBarHandler() {
   const searchValue = document.querySelector("input[class='search']");
   searchValue.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
       const currentCity = searchValue.value;
-      getForecast(currentCity);
+      getForecast(currentCity).then((data) => {
+        displayForecast(data);
+      });
     }
   });
   const loupeBtn = document.querySelector("button[class='search']");

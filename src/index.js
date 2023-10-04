@@ -1,7 +1,6 @@
-import createUI from "./modules/ui";
-import { searchBarHandler, getWMO } from "./modules/logic";
+import { createFavicon, createSearchBar } from "./modules/ui";
+import { searchBarHandler } from "./modules/logic";
 
-createUI();
+createFavicon();
+createSearchBar();
 searchBarHandler();
-console.log(getWMO(2));
-
