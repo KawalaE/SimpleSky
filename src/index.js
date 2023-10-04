@@ -3,3 +3,36 @@ import searchBarHandler from "./modules/logic";
 
 createUI();
 searchBarHandler();
+
+const wmoInterpretation = {
+  0: "Clear sky",
+  1: "Predominantly clear with scattered clouds.",
+  2: "Predominantly clear with scattered clouds.",
+  3: "Predominantly clear with scattered clouds.",
+  45: "Fog and depositing rime fog",
+  48: "Fog and depositing rime fog",
+  51: "Light drizzle at moderate and dense intensity",
+  53: "Light drizzle at moderate and dense intensity",
+  55: "Light drizzle at moderate and dense intensity",
+  56: "Freezing drizzle at light and dense intenisty",
+  57: "Freezing drizzle at light and dense intenisty",
+  61: "Rain at moderate and heavy intensity",
+  63: "Rain at moderate and heavy intensity",
+  65: "Rain at moderate and heavy intensity",
+  66: "Freezing rain at light an heavy intensity",
+  67: "Freezing rain at light an heavy intensity",
+  71: "Snow fall at slight, moderate and heavy intensity",
+  73: "Snow fall at slight, moderate and heavy intensity",
+  75: "Snow fall at slight, moderate and heavy intensity",
+  77: "Snow grains",
+  80: "Rain showers at slight, moderete and violent intensity",
+  81: "Rain showers at slight, moderete and violent intensity",
+  82: "Rain showers at slight, moderete and violent intensity",
+  85: "Snow showers at slight and heavy intensity",
+  86: "Snow showers at slight and heavy intensity",
+  95: "Thunderstorm at slight and moderate intensity",
+  96: "Thunderstorm with slight and heavy hail",
+  99: "Thunderstorm with slight and heavy hail",
+};
+
+console.log(wmoInterpretation[57]);
