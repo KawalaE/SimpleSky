@@ -47,7 +47,14 @@ export function createSearchBar() {
   searchDiv.append(deleteBtn, searchBar, searchBtn);
   page.appendChild(searchDiv);
 }
-export function displayForecast(weatherData) {
+export function displayMainForecast(city, weatherData) {
+  let mainForecast = document.createElement("div");
+  mainForecast.classList.add("main-forecast");
+  let cityName = document.createElement('p');
+  cityName.classList.add("city-name");
+  cityName.innerText = city;
+  mainForecast.append(cityName);
+  page.append(mainForecast);
+  console.log(city);
   console.log(weatherData[0]);
-  //implemenet display here;
 }

@@ -1,5 +1,5 @@
 import getForecast from "./api";
-import { displayForecast } from "./ui";
+import { displayMainForecast } from "./ui";
 
 export function searchBarHandler() {
   const searchValue = document.querySelector("input[class='search']");
@@ -7,7 +7,7 @@ export function searchBarHandler() {
     if (e.key === "Enter") {
       const currentCity = searchValue.value;
       getForecast(currentCity).then((data) => {
-        displayForecast(data);
+        displayMainForecast(currentCity, data);
       });
     }
   });
