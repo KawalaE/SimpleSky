@@ -72,13 +72,24 @@ button.search img{
 .button-delete img{
   width: 20px;
 }
+.main-forecast{
+  min-width: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 .button-delete:active, button.search img:active{
   transform: scale(80%);
-}
-.main-forecast{
-
 }
 .city-name{
   color: white;
   font-size: 2rem;
+}
+.day-side img, .night-side img{
+  width: 150px;
+  height: 150px;
+}
+.weather-container{
+  display:flex;
 }
