@@ -48,22 +48,38 @@ export function createSearchBar() {
   searchDiv.append(deleteBtn, searchBar, searchBtn);
   page.appendChild(searchDiv);
 }
-export function displayMainForecast(city, weatherData) {
-  let mainForecast = document.createElement("div");
-  mainForecast.classList.add("main-forecast");
-  const cityName = document.createElement("p");
-  cityName.classList.add("city-name");
-  cityName.innerText = city;
-  mainForecast.append(cityName);
-  page.append(mainForecast);
-  const weatherInfoConatiner = document.createElement("div");
-  weatherInfoConatiner.classList.add("weather-container");
+function mainSideForecast(weatherDiv, weatherData){
+  //percip
+  const addInfo = document.createElement('div');
+  addInfo.classList.add('add-info');
+  const possibleRain = document.createElement('p');
+  possibleRain.classList.add("pos-rain");
+  possibleRain.innerText = `Precip chance: ${weatherData[0].precipitation} %`;
+  addInfo.appendChild(possibleRain);
+  weatherDiv.appendChild(addInfo);
+  //rain sum
+  const rainMM = document.createElement('p');
+  rainMM.classList.add("rain-mm");
+  rainMM.innerText = `Rain sum: ${weatherData[0].rain} mm`;
+  addInfo.appendChild(rainMM);
+  //snowfall sum
+  const snowfallSum = document.createElement('p');
+  snowfallSum.classList.add("snow-cm");
+  snowfallSum.innerText = `Snowfall sum: ${weatherData[0].snowfall} cm`;
+  addInfo.appendChild(snowfallSum);
+  //windspeed sum
+  const windspeedMax = document.createElement('p');
+  windspeedMax.classList.add("wind-kmh");
+  windspeedMax.innerText = `Max windspeed: ${weatherData[0].snowfall} km/h`;
+  addInfo.appendChild(windspeedMax);
+
+}
+function mainAnimatedForecast(weatherDiv, weatherData) {
   const daySide = document.createElement("div");
   daySide.classList.add("day-side");
   const nightSide = document.createElement("div");
   nightSide.classList.add("night-side");
-  weatherInfoConatiner.append(daySide, nightSide);
-  mainForecast.appendChild(weatherInfoConatiner);
+  weatherDiv.append(daySide, nightSide);
   //day animation display
   const dayAnimation = document.createElement("div");
   const dayImg = document.createElement("img");
@@ -76,7 +92,32 @@ export function displayMainForecast(city, weatherData) {
   nightImg.src = getImage(weatherData[0].weathercode)[1];
   nightAnimation.appendChild(nightImg);
   nightSide.appendChild(nightAnimation);
+  //temperature day
+  const dayTemp = document.createElement('p');
+  dayTemp.innerText = `${weatherData[0].temperatureMax} °C`;
+  dayTemp.classList.add('day-temp');
+  daySide.appendChild(dayTemp);
+  //temperature night
+  const nightTemp = document.createElement('p');
+  nightTemp.innerText = `${weatherData[0].temperatureMin} °C`;
+  nightTemp.classList.add('night-temp');
+  nightSide.appendChild(nightTemp);
+}
 
+export function displayMainForecast(city, weatherData) {
+  let mainForecast = document.createElement("div");
+  mainForecast.classList.add("main-forecast");
+  const cityName = document.createElement("p");
+  cityName.classList.add("city-name");
+  cityName.innerText = city;
+  mainForecast.append(cityName);
+  page.append(mainForecast);
+  const weatherInfoConatiner = document.createElement("div");
+  weatherInfoConatiner.classList.add("weather-container");
+  mainForecast.appendChild(weatherInfoConatiner);
+  mainAnimatedForecast(weatherInfoConatiner, weatherData);
+  //other info
+  mainSideForecast(weatherInfoConatiner, weatherData);
   console.log(city);
   console.log(weatherData[0]);
 }

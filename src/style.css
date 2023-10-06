@@ -93,3 +93,22 @@ button.search img{
 .weather-container{
   display:flex;
 }
+.day-side, .night-side{
+  display: flex;
+  flex-direction:column;
+  align-items: center;
+}
+.day-temp, .night-temp{
+  color: white;
+  font-size: 1.3rem;
+}
+.add-info{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+.pos-rain, .rain-mm, .snow-cm, .wind-kmh{
+  color: white;
+  font-size: 1.3rem;
+  font-size: 1.08rem
+}
