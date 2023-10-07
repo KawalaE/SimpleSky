@@ -1,4 +1,5 @@
 import "../style.css";
+import { format } from "date-fns";
 import getImage from "./animations";
 
 import CloudRain from "../assets/pictures/weather-favicon.svg";
@@ -107,10 +108,19 @@ function mainAnimatedForecast(weatherDiv, weatherData) {
 export function displayMainForecast(city, weatherData) {
   let mainForecast = document.createElement("div");
   mainForecast.classList.add("main-forecast");
+  const mainForecastTitle = document.createElement("div");
   const cityName = document.createElement("p");
   cityName.classList.add("city-name");
   cityName.innerText = city;
-  mainForecast.append(cityName);
+  mainForecastTitle.classList.add("main-title");
+  const date = document.createElement("p");
+  date.classList.add("main-date");
+  const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  const formatedDate = format(weatherData[0].time, 'dd/MM/yyyy');
+  date.innerText = `${weekdays[(weatherData[0].time).getDay()]}, ${formatedDate} `;
+  mainForecastTitle.appendChild(cityName);
+  mainForecastTitle.appendChild(date);
+  mainForecast.append(mainForecastTitle);
   page.append(mainForecast);
   const weatherInfoConatiner = document.createElement("div");
   weatherInfoConatiner.classList.add("weather-container");

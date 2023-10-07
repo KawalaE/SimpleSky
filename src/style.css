@@ -76,8 +76,6 @@ button.search img{
   min-width: 500px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 .button-delete:active, button.search img:active{
   transform: scale(80%);
@@ -111,4 +109,14 @@ button.search img{
   color: white;
   font-size: 1.3rem;
   font-size: 1.08rem
+}
+.main-date{
+  font-size: 1.3rem;
+  color: rgb(133, 133, 133);
+}
+.main-title{
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  margin-left: 20px;
 }

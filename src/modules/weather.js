@@ -9,7 +9,7 @@ export default class Weather {
     weathercode,
     windspeed,
   ) {
-    this.time = time;
+    this.time = new Date(time);
     this.precipitation = precipitation;
     this.rain = rain;
     this.snowfall = snowfall;
