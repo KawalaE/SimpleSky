@@ -49,10 +49,18 @@ export function createSearchBar() {
   searchDiv.append(deleteBtn, searchBar, searchBtn);
   page.appendChild(searchDiv);
 }
+function parseCityName(city) {
+  const cityArr = city.split(" ");
+  for (let i = 0; i < cityArr.length; i++) {
+    cityArr[i] =
+      cityArr[i][0].toUpperCase() + cityArr[i].slice(1).toLowerCase();
+  }
+  return cityArr.join(" ");
+}
 function mainCityDate(forecastDiv, weatherData, city) {
   const cityName = document.createElement("p");
   cityName.classList.add("city-name");
-  cityName.innerText = city[0].toUpperCase() + city.slice(1).toLowerCase();
+  cityName.innerText = parseCityName(city);
   const date = document.createElement("p");
   date.classList.add("main-date");
   const weekdays = [
