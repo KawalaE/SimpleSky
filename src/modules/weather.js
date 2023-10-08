@@ -3,20 +3,20 @@ export default class Weather {
     time,
     precipitation,
     rain,
-    snowfall,
     temperatureMax,
     temperatureMin,
     weathercode,
     windspeed,
+    currentTemp,
   ) {
     this.time = new Date(time);
     this.precipitation = precipitation;
     this.rain = rain;
-    this.snowfall = snowfall;
     this.temperatureMax = temperatureMax;
     this.temperatureMin = temperatureMin;
     this.weathercode = weathercode;
     this.windspeed = windspeed;
+    this.currentTemp = currentTemp;
   }
 
   getTime() {
@@ -29,10 +29,6 @@ export default class Weather {
 
   getRain() {
     return this.rain;
-  }
-
-  getSnowfall() {
-    return this.snowfall;
   }
 
   getMaxTemp() {
@@ -49,5 +45,9 @@ export default class Weather {
 
   getWindspeed() {
     return this.windspeed;
+  }
+
+  getCurrentTemp() {
+    return this.currentTemp;
   }
 }

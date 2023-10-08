@@ -19,24 +19,28 @@ async function getLatLong(city) {
 }
 
 async function getWeather(latitude, longitude, timezone) {
-  const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&timezone=${timezone}&daily=weathercode,temperature_2m_max,temperature_2m_min,rain_sum,precipitation_probability_mean,snowfall_sum,windspeed_10m_max`;
+  const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&timezone=${timezone}&daily=weathercode,temperature_2m_max,temperature_2m_min,rain_sum,precipitation_probability_mean,windspeed_10m_max`;
   const response = await fetch(url, { mode: "cors" });
   const data = await response.json();
-  return data;
+  const url1 = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m,weathercode`;
+  const response1 = await fetch(url1, { mode: "cors" });
+  const data1 = await response1.json();
+  const weatherData = [data, data1];
+  return weatherData;
 }
-function parseData(data) {
+function parseData(dailyData, currentData) {
   const forecast = [];
   let singleDayWeather;
   for (let i = 0; i <= 6; i++) {
     singleDayWeather = new Weather(
-      data.daily.time[i],
-      data.daily.precipitation_probability_mean[i],
-      data.daily.rain_sum[i],
-      data.daily.snowfall_sum[i],
-      data.daily.temperature_2m_max[i],
-      data.daily.temperature_2m_min[i],
-      data.daily.weathercode[0],
-      data.daily.windspeed_10m_max[0],
+      dailyData.daily.time[i],
+      dailyData.daily.precipitation_probability_mean[i],
+      dailyData.daily.rain_sum[i],
+      dailyData.daily.temperature_2m_max[i],
+      dailyData.daily.temperature_2m_min[i],
+      currentData.hourly.weathercode[i],
+      dailyData.daily.windspeed_10m_max[i],
+      currentData.hourly.temperature_2m[i],
     );
     forecast.push(singleDayWeather);
   }
@@ -44,11 +48,11 @@ function parseData(data) {
 }
 
 export default function getForecast(cityName) {
-  let coordinates = [];
-  return getLatLong(cityName).then((data) => {
-    coordinates = data;
-    return getWeather(coordinates[0], coordinates[1], coordinates[2]).then(
-      (response) => parseData(response),
+  return getLatLong(cityName).then((geoLocation) => {
+    return getWeather(geoLocation[0], geoLocation[1], geoLocation[2]).then(
+      (weatherData) => {
+        return parseData(weatherData[0], weatherData[1]);
+      },
     );
   });
 }

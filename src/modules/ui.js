@@ -61,6 +61,9 @@ function mainCityDate(forecastDiv, weatherData, city) {
   const cityName = document.createElement("p");
   cityName.classList.add("city-name");
   cityName.innerText = parseCityName(city);
+  const currentTemp = document.createElement('p');
+  currentTemp.innerText = `${weatherData[0].getCurrentTemp()} °C`;
+  currentTemp.classList.add("current-temp");
   const date = document.createElement("p");
   date.classList.add("main-date");
   const weekdays = [
@@ -77,31 +80,27 @@ function mainCityDate(forecastDiv, weatherData, city) {
     weekdays[weatherData[0].getTime().getDay()]
   }, ${formatedDate} `;
   forecastDiv.appendChild(cityName);
+  forecastDiv.appendChild(currentTemp);
   forecastDiv.appendChild(date);
 }
 function mainSideForecast(weatherDiv, weatherData) {
-  //percip
   const addInfo = document.createElement("div");
+  weatherDiv.appendChild(addInfo);
+  //percip
   addInfo.classList.add('add-info');
   const possibleRain = document.createElement("p");
   possibleRain.classList.add("pos-rain");
   possibleRain.innerText = `Precip chance: ${weatherData[0].getPrecipitation()} %`;
   addInfo.appendChild(possibleRain);
-  weatherDiv.appendChild(addInfo);
   //rain sum
   const rainMM = document.createElement("p");
   rainMM.classList.add("rain-mm");
   rainMM.innerText = `Rain sum: ${weatherData[0].getRain()} mm`;
   addInfo.appendChild(rainMM);
-  //snowfall sum
-  const snowfallSum = document.createElement("p");
-  snowfallSum.classList.add("snow-cm");
-  snowfallSum.innerText = `Snowfall sum: ${weatherData[0].getSnowfall()} cm`;
-  addInfo.appendChild(snowfallSum);
   //windspeed sum
   const windspeedMax = document.createElement("p");
   windspeedMax.classList.add("wind-kmh");
-  windspeedMax.innerText = `Max windspeed: ${weatherData[0].getSnowfall()} km/h`;
+  windspeedMax.innerText = `Max windspeed: ${weatherData[0].getWindspeed()} km/h`;
   addInfo.appendChild(windspeedMax);
 }
 
