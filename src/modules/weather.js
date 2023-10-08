@@ -23,7 +23,7 @@ export default class Weather {
     return this.time;
   }
 
-  getprecipitation() {
+  getPrecipitation() {
     return this.precipitation;
   }
 
