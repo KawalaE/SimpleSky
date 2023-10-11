@@ -1,6 +1,7 @@
 import "../style.css";
 import { format } from "date-fns";
 import getImage from "./animations";
+import { sliderButtonsHandler } from "./logic";
 
 import CloudRain from "../assets/pictures/weather-favicon.svg";
 import Magnifier from "../assets/pictures/magnifier.svg";
@@ -136,7 +137,37 @@ function mainAnimatedForecast(weatherDiv, weatherData) {
   nightTemp.classList.add("night-temp");
   nightSide.appendChild(nightTemp);
 }
+function createCarousel(weatherData){
+  const carousel = document.createElement("div");
+  carousel.classList.add("carousel");
+  page.append(carousel);
 
+  //buttons
+  const buttonPrev = document.createElement("button");
+  buttonPrev.classList.add("carousel-button-prev");
+  buttonPrev.textContent = "prev";
+  const buttonNext = document.createElement("button");
+  buttonNext.classList.add("carousel-button-next");
+  buttonNext.textContent = "next";
+
+  //slides
+  const slideList = document.createElement("div");
+  slideList.classList.add("slide-list");
+  carousel.append(slideList);
+  for (let i = 1; i < 7; i++) {
+    const listElement = document.createElement("div");
+    if (i <= 3) {
+      listElement.classList.add("data-active");
+    }
+    const weatherAnimation1 = document.createElement("img");
+    listElement.append(weatherAnimation1);
+    weatherAnimation1.src = getImage(weatherData[i].getWeatherCode())[0];
+    listElement.classList.add("slide");
+    slideList.append(listElement);
+  }
+  carousel.append(buttonPrev, slideList, buttonNext);
+  sliderButtonsHandler();
+}
 export function displayMainForecast(city, weatherData) {
   const mainForecast = document.createElement("div");
   mainForecast.classList.add("main-forecast");
@@ -150,6 +181,7 @@ export function displayMainForecast(city, weatherData) {
   mainCityDate(mainForecastTitle, weatherData, city);
   mainAnimatedForecast(weatherInfoConatiner, weatherData);
   mainSideForecast(weatherInfoConatiner, weatherData);
+  createCarousel(weatherData);
   console.log(city);
   console.log(weatherData[0]);
 }

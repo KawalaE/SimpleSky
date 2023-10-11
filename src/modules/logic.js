@@ -1,7 +1,7 @@
 import getForecast from "./api";
 import { displayMainForecast } from "./ui";
 
-export default function searchBarHandler() {
+export function searchBarHandler() {
   const searchValue = document.querySelector("input[class='search']");
   searchValue.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
@@ -20,4 +20,39 @@ export default function searchBarHandler() {
   deleteBtn.addEventListener("click", () => {
     searchValue.value = "";
   });
+}
+
+export function sliderButtonsHandler() {
+  const prevBtn = document.querySelector(".carousel-button-prev");
+  const nextBtn = document.querySelector(".carousel-button-next");
+  let allSlides = document.querySelectorAll(".slide");
+  let activeElements = [];
+  let nonActive = [];
+
+  allSlides.forEach((slide) => {
+    if (slide.classList.contains("data-active")) {
+      activeElements.push(slide);
+    } else {
+      nonActive.push(slide);
+    }
+  });
+  nextBtn.addEventListener("click", () => {
+    if(!allSlides[5].classList.contains("data-active")){
+      activeElements[0].classList.remove("data-active");
+      nonActive.push(activeElements[0]);
+      activeElements.shift();
+      nonActive[0].classList.add("data-active");
+      activeElements.push(nonActive[0]);
+      nonActive.shift(); 
+    }
+  });
+  prevBtn.addEventListener("click", () => {
+    if(!allSlides[0].classList.contains("data-active")){
+      activeElements[activeElements.length-1].classList.remove("data-active");
+      nonActive.unshift(activeElements[activeElements.length-1]);
+      activeElements.pop();
+      nonActive[nonActive.length-1].classList.add("data-active");
+      activeElements.unshift(nonActive[nonActive.length-1]);
+      nonActive.pop();
+  }});
 }
