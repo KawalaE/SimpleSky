@@ -87,20 +87,20 @@ function mainSideForecast(weatherDiv, weatherData) {
   const addInfo = document.createElement("div");
   weatherDiv.appendChild(addInfo);
   //percip
-  addInfo.classList.add('add-info');
+  addInfo.classList.add("add-info");
   const possibleRain = document.createElement("p");
   possibleRain.classList.add("pos-rain");
-  possibleRain.innerText = `Precip chance: ${weatherData[0].getPrecipitation()} %`;
+  possibleRain.innerText = `Rain: ${weatherData[0].getPrecipitation()} %`;
   addInfo.appendChild(possibleRain);
   //rain sum
-  const rainMM = document.createElement("p");
-  rainMM.classList.add("rain-mm");
-  rainMM.innerText = `Rain sum: ${weatherData[0].getRain()} mm`;
-  addInfo.appendChild(rainMM);
+  const humidity = document.createElement("p");
+  humidity.classList.add("humidity");
+  humidity.innerText = `Humidity: ${weatherData[0].getCurrentHumidity()} %`;
+  addInfo.appendChild(humidity);
   //windspeed sum
   const windspeedMax = document.createElement("p");
   windspeedMax.classList.add("wind-kmh");
-  windspeedMax.innerText = `Max windspeed: ${weatherData[0].getWindspeed()} km/h`;
+  windspeedMax.innerText = `Wind: ${weatherData[0].getWindspeed()} km/h`;
   addInfo.appendChild(windspeedMax);
 }
 
@@ -109,7 +109,10 @@ function mainAnimatedForecast(weatherDiv, weatherData) {
   daySide.classList.add("day-side");
   const nightSide = document.createElement("div");
   nightSide.classList.add("night-side");
-  weatherDiv.append(daySide, nightSide);
+  const weatherAnimations = document.createElement("div");
+  weatherAnimations.append(daySide, nightSide);
+  weatherAnimations.classList.add('weather-animations');
+  weatherDiv.append(weatherAnimations);
   //day animation display
   const dayAnimation = document.createElement("div");
   const dayImg = document.createElement("img");

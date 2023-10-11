@@ -90,6 +90,7 @@ button.search img{
 }
 .weather-container{
   display:flex;
+  justify-content: space-around;
 }
 .day-side, .night-side{
   display: flex;
@@ -106,7 +107,7 @@ button.search img{
   justify-content: center;
   gap: 10px;
 }
-.pos-rain, .rain-mm, .wind-kmh, .current-temp{
+.pos-rain, .humidity, .wind-kmh, .current-temp{
   color: white;
   font-size: 1.1rem;
 }
@@ -122,4 +123,8 @@ button.search img{
 }
 .current-temp {
   font-size: 2rem;
+}
+.weather-animations{
+  display: flex;
+
 }

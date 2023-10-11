@@ -22,7 +22,7 @@ async function getWeather(latitude, longitude, timezone) {
   const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&timezone=${timezone}&daily=weathercode,temperature_2m_max,temperature_2m_min,rain_sum,precipitation_probability_mean,windspeed_10m_max`;
   const response = await fetch(url, { mode: "cors" });
   const data = await response.json();
-  const url1 = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m,weathercode`;
+  const url1 = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m,weathercode,relativehumidity_2m`;
   const response1 = await fetch(url1, { mode: "cors" });
   const data1 = await response1.json();
   const weatherData = [data, data1];
@@ -41,6 +41,7 @@ function parseData(dailyData, currentData) {
       currentData.hourly.weathercode[i],
       dailyData.daily.windspeed_10m_max[i],
       currentData.hourly.temperature_2m[i],
+      currentData.hourly.relativehumidity_2m[i],
     );
     forecast.push(singleDayWeather);
   }

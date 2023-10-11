@@ -8,6 +8,7 @@ export default class Weather {
     weathercode,
     windspeed,
     currentTemp,
+    currentHumidity,
   ) {
     this.time = new Date(time);
     this.precipitation = precipitation;
@@ -17,6 +18,7 @@ export default class Weather {
     this.weathercode = weathercode;
     this.windspeed = windspeed;
     this.currentTemp = currentTemp;
+    this.currentHumidity = currentHumidity;
   }
 
   getTime() {
@@ -49,5 +51,9 @@ export default class Weather {
 
   getCurrentTemp() {
     return this.currentTemp;
+  }
+
+  getCurrentHumidity() {
+    return this.currentHumidity;
   }
 }
