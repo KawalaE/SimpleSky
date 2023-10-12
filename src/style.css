@@ -25,6 +25,7 @@ body{
   flex-direction: column;
   align-items: center;
   padding-top: 150px;
+  gap: 40px;
 }
 .search{
   background-color: transparent;
@@ -42,7 +43,7 @@ body{
   width: 300px;
   gap: 10px;
   caret-color: white;
-  margin-bottom: 70px;
+  margin-bottom: 30px;
 }
 button.search{
   width: 30px;
@@ -129,6 +130,7 @@ button.search img{
 }
 .carousel{
   display: flex;
+  align-items: center;
 }
 .slide-list{
   display:flex;
@@ -140,4 +142,22 @@ button.search img{
 .data-active{
   opacity: 1;
   display: block;
+}
+.carousel-button-prev, .carousel-button-next{
+  background-color: transparent;
+  height: 50px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+.carousel-button-prev:hover, .carousel-button-next:hover{
+  transform: scale(120%);
+}
+.carousel-button-prev img, .carousel-button-next img{
+  width: 50px;
+}
+.end{
+  filter: opacity(0.5);
+  pointer-events: none;
+  cursor: default;
 }

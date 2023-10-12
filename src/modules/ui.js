@@ -6,6 +6,8 @@ import { sliderButtonsHandler } from "./logic";
 import CloudRain from "../assets/pictures/weather-favicon.svg";
 import Magnifier from "../assets/pictures/magnifier.svg";
 import Delete from "../assets/pictures/delete.svg";
+import LeftArrow from "../assets/pictures/left-arrow.svg";
+import RightArrow from "../assets/pictures/right-arrow.svg";
 
 const cloudRaining = new Image();
 cloudRaining.src = CloudRain;
@@ -15,6 +17,12 @@ magnifier.src = Magnifier;
 
 const deleteX = new Image();
 deleteX.src = Delete;
+
+const leftArrow = new Image();
+leftArrow.src = LeftArrow;
+
+const rightArrow = new Image();
+rightArrow.src = RightArrow;
 
 const page = document.createElement("div");
 
@@ -144,11 +152,15 @@ function createCarousel(weatherData){
 
   //buttons
   const buttonPrev = document.createElement("button");
+  const btnPrevImg = document.createElement("img");
+  btnPrevImg.src = leftArrow.src;
+  buttonPrev.appendChild(btnPrevImg);
   buttonPrev.classList.add("carousel-button-prev");
-  buttonPrev.textContent = "prev";
   const buttonNext = document.createElement("button");
+  const btnNextImg = document.createElement("img");
+  btnNextImg.src = rightArrow.src;
+  buttonNext.appendChild(btnNextImg);
   buttonNext.classList.add("carousel-button-next");
-  buttonNext.textContent = "next";
 
   //slides
   const slideList = document.createElement("div");
@@ -159,10 +171,13 @@ function createCarousel(weatherData){
     if (i <= 3) {
       listElement.classList.add("data-active");
     }
+    //const date = document.createElement("p");
+    //date.textContent = format(weatherData[i].getTime(), "dd/MM/yyyy");
     const weatherAnimation1 = document.createElement("img");
     listElement.append(weatherAnimation1);
     weatherAnimation1.src = getImage(weatherData[i].getWeatherCode())[0];
     listElement.classList.add("slide");
+    //slideList.append(date);
     slideList.append(listElement);
   }
   carousel.append(buttonPrev, slideList, buttonNext);
