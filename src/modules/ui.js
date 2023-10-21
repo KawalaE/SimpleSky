@@ -171,13 +171,13 @@ function createCarousel(weatherData){
     if (i <= 3) {
       listElement.classList.add("data-active");
     }
-    //const date = document.createElement("p");
-    //date.textContent = format(weatherData[i].getTime(), "dd/MM/yyyy");
+    const date = document.createElement("p");
+    date.textContent = format(weatherData[i].getTime(), "dd/MM/yyyy");
     const weatherAnimation1 = document.createElement("img");
     listElement.append(weatherAnimation1);
     weatherAnimation1.src = getImage(weatherData[i].getWeatherCode())[0];
     listElement.classList.add("slide");
-    //slideList.append(date);
+    listElement.append(date);
     slideList.append(listElement);
   }
   carousel.append(buttonPrev, slideList, buttonNext);

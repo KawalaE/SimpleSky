@@ -138,17 +138,20 @@ button.search img{
 .slide{
   display: none;
   width: 150px;
+  transition: 300ms ease-in;
 }
 .data-active{
   opacity: 1;
-  display: block;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
 }
 .carousel-button-prev, .carousel-button-next{
   background-color: transparent;
   height: 50px;
   border: none;
   cursor: pointer;
-  transition: 0.3s ease-in-out;
 }
 .carousel-button-prev:hover, .carousel-button-next:hover{
   transform: scale(120%);

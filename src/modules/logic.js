@@ -29,6 +29,9 @@ export function sliderButtonsHandler() {
   const activeElements = [];
   const nonActive = [];
 
+  if (allSlides[0].classList.contains("data-active")) {
+    prevBtn.classList.add("end");
+  }
   allSlides.forEach((slide) => {
     if (slide.classList.contains("data-active")) {
       activeElements.push(slide);
@@ -37,29 +40,31 @@ export function sliderButtonsHandler() {
     }
   });
   nextBtn.addEventListener("click", () => {
-    if (!allSlides[5].classList.contains("data-active")) {
-      prevBtn.classList.remove("end");
+    if (allSlides[allSlides.length - 2].classList.contains("data-active")) {
+      nextBtn.classList.add("end");
+    }
+    if (!allSlides[allSlides.length - 1].classList.contains("data-active")) {
       activeElements[0].classList.remove("data-active");
       nonActive.push(activeElements[0]);
       activeElements.shift();
       nonActive[0].classList.add("data-active");
       activeElements.push(nonActive[0]);
       nonActive.shift();
-    } else {
-      nextBtn.classList.add("end");
+      prevBtn.classList.remove("end");
     }
   });
   prevBtn.addEventListener("click", () => {
+    if (allSlides[1].classList.contains("data-active")) {
+      prevBtn.classList.add("end");
+    }
     if (!allSlides[0].classList.contains("data-active")) {
-      nextBtn.classList.remove("end");
       activeElements[activeElements.length - 1].classList.remove("data-active");
       nonActive.unshift(activeElements[activeElements.length - 1]);
       activeElements.pop();
       nonActive[nonActive.length - 1].classList.add("data-active");
       activeElements.unshift(nonActive[nonActive.length - 1]);
       nonActive.pop();
-    } else {
-      prevBtn.classList.add("end");
+      nextBtn.classList.remove("end");
     }
   });
 }
