@@ -131,6 +131,7 @@ button.search img{
 .carousel{
   display: flex;
   align-items: center;
+  margin-top: 20px;
 }
 .slide-list{
   display:flex;
@@ -152,6 +153,7 @@ button.search img{
   height: 50px;
   border: none;
   cursor: pointer;
+
 }
 .carousel-button-prev:hover, .carousel-button-next:hover{
   transform: scale(120%);
@@ -163,4 +165,12 @@ button.search img{
   filter: opacity(0.5);
   pointer-events: none;
   cursor: default;
+}
+.slide-temp{
+  display: flex;
+  color: white;
+  gap: 18px;
+}
+.slide-temp p{
+  font-size: 1.07rem;
 }

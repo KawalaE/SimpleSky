@@ -25,7 +25,15 @@ const rightArrow = new Image();
 rightArrow.src = RightArrow;
 
 const page = document.createElement("div");
-
+const weekdays = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+];
 export function createFavicon() {
   const head = document.querySelector("head");
   const favicon = document.createElement("link");
@@ -75,15 +83,6 @@ function mainCityDate(forecastDiv, weatherData, city) {
   currentTemp.classList.add("current-temp");
   const date = document.createElement("p");
   date.classList.add("main-date");
-  const weekdays = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ];
   const formatedDate = format(weatherData[0].getTime(), "dd/MM/yyyy");
   date.innerText = `${
     weekdays[weatherData[0].getTime().getDay()]
@@ -171,13 +170,21 @@ function createCarousel(weatherData){
     if (i <= 3) {
       listElement.classList.add("data-active");
     }
+    const weekDay = document.createElement("p");
+    weekDay.textContent = weekdays[weatherData[i].getTime().getDay()];
     const date = document.createElement("p");
     date.textContent = format(weatherData[i].getTime(), "dd/MM/yyyy");
     const weatherAnimation1 = document.createElement("img");
-    listElement.append(weatherAnimation1);
     weatherAnimation1.src = getImage(weatherData[i].getWeatherCode())[0];
     listElement.classList.add("slide");
-    listElement.append(date);
+    const tempInfo = document.createElement("div");
+    tempInfo.classList.add("slide-temp");
+    const maxTemp = document.createElement("p");
+    maxTemp.textContent = `${weatherData[i].getMaxTemp()} °C`;
+    const minTemp = document.createElement("p");
+    minTemp.textContent = `${weatherData[i].getMinTemp()} °C`;
+    tempInfo.append(maxTemp, minTemp);
+    listElement.append(weekDay, date, weatherAnimation1, tempInfo);
     slideList.append(listElement);
   }
   carousel.append(buttonPrev, slideList, buttonNext);
