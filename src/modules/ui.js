@@ -174,7 +174,7 @@ function createCarousel(weatherData){
     weekDay.classList.add("slide-weekday");
     weekDay.textContent = weekdays[weatherData[i].getTime().getDay()];
     const date = document.createElement("p");
-    date.classList.add('slide-date');
+    date.classList.add("slide-date");
     date.textContent = format(weatherData[i].getTime(), "dd/MM/yyyy");
     const weatherAnimation1 = document.createElement("img");
     weatherAnimation1.src = getImage(weatherData[i].getWeatherCode())[0];
@@ -208,4 +208,12 @@ export function displayMainForecast(city, weatherData) {
   createCarousel(weatherData);
   console.log(city);
   console.log(weatherData[0]);
+}
+export function removePreviousForecast() {
+  const mainForecast = document.querySelector(".main-forecast");
+  const carouselForecast = document.querySelector(".carousel");
+  if (mainForecast && carouselForecast) {
+    mainForecast.remove();
+    carouselForecast.remove();
+  }
 }
