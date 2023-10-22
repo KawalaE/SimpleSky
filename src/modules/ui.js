@@ -1,7 +1,7 @@
 import "../style.css";
 import { format } from "date-fns";
 import getImage from "./animations";
-import { sliderButtonsHandler } from "./logic";
+import { sliderButtonsHandler, unitHandler } from "./logic";
 
 import CloudRain from "../assets/pictures/weather-favicon.svg";
 import Magnifier from "../assets/pictures/magnifier.svg";
@@ -64,7 +64,21 @@ export function createSearchBar() {
   loupe.src = magnifier.src;
   searchBtn.append(magnifier);
   searchDiv.append(deleteBtn, searchBar, searchBtn);
-  page.appendChild(searchDiv);
+  const searchAndTemp = document.createElement("div");
+  searchAndTemp.classList.add("search-temp");
+  searchAndTemp.append(searchDiv);
+  page.appendChild(searchAndTemp);
+}
+export function crateUnitButtons() {
+  const fahrenheit = document.createElement("button");
+  const celsius = document.createElement("button");
+  fahrenheit.textContent = "°F";
+  celsius.textContent = "°C";
+  fahrenheit.classList.add("fahrenheit-btn");
+  celsius.classList.add("celsius-btn");
+  const searchContainer = document.querySelector(".search-temp");
+  searchContainer.append(fahrenheit, celsius);
+  unitHandler();
 }
 function parseCityName(city) {
   const cityArr = city.split(" ");
@@ -74,12 +88,12 @@ function parseCityName(city) {
   }
   return cityArr.join(" ");
 }
-function mainCityDate(forecastDiv, weatherData, city) {
+function mainCityDate(forecastDiv, weatherData, city, unit) {
   const cityName = document.createElement("p");
   cityName.classList.add("city-name");
   cityName.innerText = parseCityName(city);
-  const currentTemp = document.createElement('p');
-  currentTemp.innerText = `${weatherData[0].getCurrentTemp()} °C`;
+  const currentTemp = document.createElement("p");
+  currentTemp.innerText = `${weatherData[0].getCurrentTemp()} ${unit}`;
   currentTemp.classList.add("current-temp");
   const date = document.createElement("p");
   date.classList.add("main-date");
@@ -112,7 +126,7 @@ function mainSideForecast(weatherDiv, weatherData) {
   addInfo.appendChild(windspeedMax);
 }
 
-function mainAnimatedForecast(weatherDiv, weatherData) {
+function mainAnimatedForecast(weatherDiv, weatherData, unit) {
   const daySide = document.createElement("div");
   daySide.classList.add("day-side");
   const nightSide = document.createElement("div");
@@ -135,16 +149,16 @@ function mainAnimatedForecast(weatherDiv, weatherData) {
   nightSide.appendChild(nightAnimation);
   //temperature day
   const dayTemp = document.createElement("p");
-  dayTemp.innerText = `${weatherData[0].getMaxTemp()} °C`;
+  dayTemp.innerText = `${weatherData[0].getMaxTemp()} ${unit}`;
   dayTemp.classList.add("day-temp");
   daySide.appendChild(dayTemp);
   //temperature night
   const nightTemp = document.createElement("p");
-  nightTemp.innerText = `${weatherData[0].getMinTemp()} °C`;
+  nightTemp.innerText = `${weatherData[0].getMinTemp()} ${unit}`;
   nightTemp.classList.add("night-temp");
   nightSide.appendChild(nightTemp);
 }
-function createCarousel(weatherData){
+function createCarousel(weatherData, unit) {
   const carousel = document.createElement("div");
   carousel.classList.add("carousel");
   page.append(carousel);
@@ -182,9 +196,9 @@ function createCarousel(weatherData){
     const tempInfo = document.createElement("div");
     tempInfo.classList.add("slide-temp");
     const maxTemp = document.createElement("p");
-    maxTemp.textContent = `${weatherData[i].getMaxTemp()} °C`;
+    maxTemp.textContent = `${weatherData[i].getMaxTemp()} ${unit}`;
     const minTemp = document.createElement("p");
-    minTemp.textContent = `${weatherData[i].getMinTemp()} °C`;
+    minTemp.textContent = `${weatherData[i].getMinTemp()} ${unit}`;
     tempInfo.append(maxTemp, minTemp);
     listElement.append(weekDay, date, weatherAnimation1, tempInfo);
     slideList.append(listElement);
@@ -192,7 +206,11 @@ function createCarousel(weatherData){
   carousel.append(buttonPrev, slideList, buttonNext);
   sliderButtonsHandler();
 }
-export function displayMainForecast(city, weatherData) {
+export function displayMainForecast(city, weatherData, unit) {
+  let unitSymbol;
+  if (unit === "fahrenheit") {
+    unitSymbol = "°F";
+  } else unitSymbol = "°C";
   const mainForecast = document.createElement("div");
   mainForecast.classList.add("main-forecast");
   const mainForecastTitle = document.createElement("div");
@@ -202,10 +220,10 @@ export function displayMainForecast(city, weatherData) {
   const weatherInfoConatiner = document.createElement("div");
   weatherInfoConatiner.classList.add("weather-container");
   mainForecast.appendChild(weatherInfoConatiner);
-  mainCityDate(mainForecastTitle, weatherData, city);
-  mainAnimatedForecast(weatherInfoConatiner, weatherData);
-  mainSideForecast(weatherInfoConatiner, weatherData);
-  createCarousel(weatherData);
+  mainCityDate(mainForecastTitle, weatherData, city, unitSymbol);
+  mainAnimatedForecast(weatherInfoConatiner, weatherData, unitSymbol);
+  mainSideForecast(weatherInfoConatiner, weatherData, unitSymbol);
+  createCarousel(weatherData, unitSymbol, unitSymbol);
   console.log(city);
   console.log(weatherData[0]);
 }

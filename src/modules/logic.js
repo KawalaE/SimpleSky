@@ -1,28 +1,65 @@
 import getForecast from "./api";
 import { displayMainForecast, removePreviousForecast } from "./ui";
 
-export function searchBarHandler() {
+let currentCity;
+
+function weatherHandler(city, unit) {
+  getForecast(city, unit).then((data) => {
+    removePreviousForecast();
+    displayMainForecast(city, data, unit);
+  });
+}
+function getCurrentUnit(unitStr) {
+  if (unitStr === "°C") {
+    return "celsius";
+  }
+  return "fahrenheit";
+}
+export function searchBarHandler(unit) {
   const searchValue = document.querySelector("input[class='search']");
+  currentCity = searchValue.value ? searchValue.value : "New York";
+
+  if (!searchValue.value) {
+    weatherHandler(currentCity, unit);
+  }
   searchValue.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
-      const currentCity = searchValue.value;
-      getForecast(currentCity).then((data) => {
-        removePreviousForecast();
-        displayMainForecast(currentCity, data);
-      });
+      currentCity = searchValue.value;
+      const unitDOM = getCurrentUnit(
+        document.querySelector(".unit-current").textContent,
+      );
+      weatherHandler(currentCity, unitDOM);
     }
   });
   const loupeBtn = document.querySelector("button[class='search']");
   loupeBtn.addEventListener("click", () => {
-    const currentCity = searchValue.value;
-    getForecast(currentCity);
+    currentCity = searchValue.value;
+    const unitDOM = getCurrentUnit(
+      document.querySelector(".unit-current").textContent,
+    );
+    weatherHandler(currentCity, unitDOM);
   });
   const deleteBtn = document.querySelector(".button-delete");
   deleteBtn.addEventListener("click", () => {
     searchValue.value = "";
   });
 }
+export function unitHandler() {
+  const fahrenheitBtn = document.querySelector(".fahrenheit-btn");
+  const celsiusBtn = document.querySelector(".celsius-btn");
+  celsiusBtn.classList.add("unit-current");
 
+  fahrenheitBtn.addEventListener("click", () => {
+    celsiusBtn.classList.remove("unit-current");
+    fahrenheitBtn.classList.add("unit-current");
+    weatherHandler(currentCity, "fahrenheit");
+  });
+  celsiusBtn.addEventListener("click", () => {
+    celsiusBtn.classList.add("unit-current");
+    fahrenheitBtn.classList.remove("unit-current");
+    weatherHandler(currentCity, "celsius");
+  });
+}
 export function sliderButtonsHandler() {
   const prevBtn = document.querySelector(".carousel-button-prev");
   const nextBtn = document.querySelector(".carousel-button-next");

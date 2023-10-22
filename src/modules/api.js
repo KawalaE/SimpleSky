@@ -18,11 +18,11 @@ async function getLatLong(city) {
   }
 }
 
-async function getWeather(latitude, longitude, timezone) {
-  const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&timezone=${timezone}&daily=weathercode,temperature_2m_max,temperature_2m_min,rain_sum,precipitation_probability_mean,windspeed_10m_max`;
+async function getWeather(latitude, longitude, timezone, unit) {
+  const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&timezone=${timezone}&temperature_unit=${unit}&daily=weathercode,temperature_2m_max,temperature_2m_min,rain_sum,precipitation_probability_mean,windspeed_10m_max`;
   const response = await fetch(url, { mode: "cors" });
   const data = await response.json();
-  const url1 = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m,weathercode,relativehumidity_2m`;
+  const url1 = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&temperature_unit=${unit}&hourly=temperature_2m,weathercode,relativehumidity_2m`;
   const response1 = await fetch(url1, { mode: "cors" });
   const data1 = await response1.json();
   const weatherData = [data, data1];
@@ -48,9 +48,9 @@ function parseData(dailyData, currentData) {
   return forecast;
 }
 
-export default function getForecast(cityName) {
+export default function getForecast(cityName, unit) {
   return getLatLong(cityName).then((geoLocation) => {
-    return getWeather(geoLocation[0], geoLocation[1], geoLocation[2]).then(
+    return getWeather(geoLocation[0], geoLocation[1], geoLocation[2], unit).then(
       (weatherData) => {
         return parseData(weatherData[0], weatherData[1]);
       },

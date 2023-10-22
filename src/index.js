@@ -1,7 +1,8 @@
-import { createFavicon, createSearchBar } from "./modules/ui";
-import {searchBarHandler, sliderButtonsHandler} from "./modules/logic";
+import { createFavicon, createSearchBar, crateUnitButtons } from "./modules/ui";
+import { searchBarHandler, unitHandler } from "./modules/logic";
 
 createFavicon();
 createSearchBar();
-searchBarHandler();
-sliderButtonsHandler();
+crateUnitButtons();
+searchBarHandler("celsius");
+unitHandler();
