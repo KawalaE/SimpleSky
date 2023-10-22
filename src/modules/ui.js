@@ -171,8 +171,10 @@ function createCarousel(weatherData){
       listElement.classList.add("data-active");
     }
     const weekDay = document.createElement("p");
+    weekDay.classList.add("slide-weekday");
     weekDay.textContent = weekdays[weatherData[i].getTime().getDay()];
     const date = document.createElement("p");
+    date.classList.add('slide-date');
     date.textContent = format(weatherData[i].getTime(), "dd/MM/yyyy");
     const weatherAnimation1 = document.createElement("img");
     weatherAnimation1.src = getImage(weatherData[i].getWeatherCode())[0];
