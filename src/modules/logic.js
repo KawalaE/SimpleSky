@@ -38,17 +38,16 @@ export function searchBarHandler(unit) {
   const searchValue = document.querySelector("input[class='search']");
   const storageVal = localStorage.getItem("city") || "New York";
   currentCity = searchValue.value ? searchValue.value : storageVal;
-
   if (!searchValue.value) {
     weatherHandler(currentCity, unit);
   }
   searchValue.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
       currentCity = searchValue.value;
-      localStorage.setItem("city", currentCity);
       const unitDOM = getCurrentUnit(
         document.querySelector(".unit-current").textContent,
       );
+      localStorage.setItem("city", currentCity);
       weatherHandler(currentCity, unitDOM);
     }
   });
@@ -68,16 +67,19 @@ export function searchBarHandler(unit) {
 export function unitHandler() {
   const fahrenheitBtn = document.querySelector(".fahrenheit-btn");
   const celsiusBtn = document.querySelector(".celsius-btn");
-  celsiusBtn.classList.add("unit-current");
 
   fahrenheitBtn.addEventListener("click", () => {
     celsiusBtn.classList.remove("unit-current");
     fahrenheitBtn.classList.add("unit-current");
+    localStorage.setItem("unit", "fahrenheit");
+    localStorage.setItem("speed", "mph");
     weatherHandler(currentCity, "fahrenheit");
   });
   celsiusBtn.addEventListener("click", () => {
     celsiusBtn.classList.add("unit-current");
     fahrenheitBtn.classList.remove("unit-current");
+    localStorage.setItem("unit", "celsius");
+    localStorage.setItem("speed", "kmh");
     weatherHandler(currentCity, "celsius");
   });
 }
