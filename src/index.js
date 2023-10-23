@@ -4,5 +4,5 @@ import { searchBarHandler, unitHandler } from "./modules/logic";
 createFavicon();
 createSearchBar();
 crateUnitButtons();
-searchBarHandler("celsius");
+searchBarHandler("celsius", "kmh");
 unitHandler();

@@ -24,6 +24,8 @@ leftArrow.src = LeftArrow;
 const rightArrow = new Image();
 rightArrow.src = RightArrow;
 
+const mphConstant = 0.621371192;
+
 const page = document.createElement("div");
 const weekdays = [
   "Sunday",
@@ -105,7 +107,7 @@ function mainCityDate(forecastDiv, weatherData, city, unit) {
   forecastDiv.appendChild(currentTemp);
   forecastDiv.appendChild(date);
 }
-function mainSideForecast(weatherDiv, weatherData) {
+function mainSideForecast(weatherDiv, weatherData, unit) {
   const addInfo = document.createElement("div");
   weatherDiv.appendChild(addInfo);
   //percip
@@ -121,8 +123,15 @@ function mainSideForecast(weatherDiv, weatherData) {
   addInfo.appendChild(humidity);
   //windspeed sum
   const windspeedMax = document.createElement("p");
-  windspeedMax.classList.add("wind-kmh");
-  windspeedMax.innerText = `Wind: ${weatherData[0].getWindspeed()} km/h`;
+  windspeedMax.classList.add("wind-speed");
+  if(unit === "°C"){
+    windspeedMax.innerText = `Wind: ${weatherData[0].getWindspeed()} km/h`;
+  } else {
+    windspeedMax.innerText = `Wind: ${
+      Math.round(weatherData[0].getWindspeed() * mphConstant * 10) / 10
+    } mph`;
+  }
+
   addInfo.appendChild(windspeedMax);
 }
 

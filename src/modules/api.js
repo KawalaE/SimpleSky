@@ -50,10 +50,13 @@ function parseData(dailyData, currentData) {
 
 export default function getForecast(cityName, unit) {
   return getLatLong(cityName).then((geoLocation) => {
-    return getWeather(geoLocation[0], geoLocation[1], geoLocation[2], unit).then(
-      (weatherData) => {
-        return parseData(weatherData[0], weatherData[1]);
-      },
-    );
+    return getWeather(
+      geoLocation[0],
+      geoLocation[1],
+      geoLocation[2],
+      unit,
+    ).then((weatherData) => {
+      return parseData(weatherData[0], weatherData[1]);
+    });
   });
 }
