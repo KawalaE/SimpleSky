@@ -36,7 +36,8 @@ function getCurrentUnit(unitStr) {
 }
 export function searchBarHandler(unit) {
   const searchValue = document.querySelector("input[class='search']");
-  currentCity = searchValue.value ? searchValue.value : "New York";
+  const storageVal = localStorage.getItem("city") || "New York";
+  currentCity = searchValue.value ? searchValue.value : storageVal;
 
   if (!searchValue.value) {
     weatherHandler(currentCity, unit);
@@ -44,6 +45,7 @@ export function searchBarHandler(unit) {
   searchValue.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
       currentCity = searchValue.value;
+      localStorage.setItem("city", currentCity);
       const unitDOM = getCurrentUnit(
         document.querySelector(".unit-current").textContent,
       );
