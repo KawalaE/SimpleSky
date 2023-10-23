@@ -3,8 +3,27 @@ import { displayMainForecast, removePreviousForecast } from "./ui";
 
 let currentCity;
 
+export function createLoader() {
+  const page = document.querySelector(".page");
+  const loader = document.createElement("div");
+  loader.classList.add("loader");
+  page.append(loader);
+}
 function weatherHandler(city, unit) {
+  const forecastDOM = document.querySelector(".main-forecast");
+  const carouselDOM = document.querySelector(".carousel");
+  const loader = document.querySelector(".loader");
+  loader.style.display = "block";
+  if (forecastDOM !== null && carouselDOM !== null) {
+    forecastDOM.style.visibility = "hidden";
+    carouselDOM.style.visibility = "hidden";
+  }
   getForecast(city, unit).then((data) => {
+    if (forecastDOM !== null && carouselDOM !== null) {
+      forecastDOM.style.visibility = "visible";
+      carouselDOM.style.visibility = "visible";
+    }
+    loader.style.display = "none";
     removePreviousForecast();
     displayMainForecast(city, data, unit);
   });

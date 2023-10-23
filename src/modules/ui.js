@@ -36,6 +36,19 @@ const weekdays = [
   "Friday",
   "Saturday",
 ];
+export function pageLoader() {
+  const mainForecast = document.querySelector(".main-forecast");
+  const carousel = document.querySelector(".carousel");
+  document.onreadystatechange = function () {
+    if (document.readyState !== "complete") {
+      mainForecast.style.visibility = "hidden";
+      carousel.style.visibility = "hidden";
+    } else {
+      mainForecast.style.visibility = "visible";
+      carousel.style.visibility = "visible";
+    }
+  } 
+}
 export function createFavicon() {
   const head = document.querySelector("head");
   const favicon = document.createElement("link");
