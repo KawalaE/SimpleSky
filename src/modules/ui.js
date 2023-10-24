@@ -108,9 +108,10 @@ function mainCityDate(forecastDiv, weatherData, city, unit) {
   date.innerText = `${
     weekdays[weatherData[0].getTime().getDay()]
   }, ${formatedDate} `;
-  forecastDiv.appendChild(cityName);
-  forecastDiv.appendChild(currentTemp);
-  forecastDiv.appendChild(date);
+  const mainCityInfo = document.createElement("div");
+  mainCityInfo.classList.add("main-city");
+  mainCityInfo.append(cityName, currentTemp);
+  forecastDiv.append(mainCityInfo, date);
 }
 function mainSideForecast(weatherDiv, weatherData, unit) {
   const addInfo = document.createElement("div");
@@ -244,7 +245,7 @@ export function displayMainForecast(city, weatherData, unit) {
   createCarousel(weatherData, unitSymbol, number);
   window.addEventListener("resize", () => {
     const numOfSlides = document.querySelectorAll(".data-active");
-    console.log(numOfSlides)
+    console.log(numOfSlides);
     if (
       window.innerWidth < 590 &&
       window.innerWidth > 400 &&

@@ -16,7 +16,7 @@
   font-size: 16px;
 }
 body{
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   background: rgb(27, 27, 27);
@@ -91,7 +91,7 @@ button.search img{
   width: 20px;
 }
 .main-forecast{
-  min-width: 500px;
+  max-width: 500px;
   display: flex;
   flex-direction: column;
 }
@@ -144,6 +144,10 @@ button.search img{
 }
 .weather-animations{
   display: flex;
+}
+.main-city{
+  display: flex;
+  gap: 20px;
 }
 .carousel{
   display: flex;
@@ -235,7 +239,35 @@ button.search img{
   gap: 15px;
   justify-content: center;
   margin-top:auto;
+  align-items: center;
   margin-bottom: 10px;
 }
 @media all and (max-width: 590px){
+  .weather-container{
+    align-items: center;
+    flex-direction: column;
+    gap: 40px;
+    margin-top: 20px;
+  }
+  .carousel{
+    margin-top: 20px;
+  }
+  .main-title{
+    flex-direction: column;
+  }
+  .page{
+    padding-top: 20px;
+  }
+  .search-container{
+    width: 250px;
+  }
+  .search{
+    width: 150px;
+  }
+  *{
+    font-size: 14.5px;
+  }
+  .footer{
+    margin-top: 40px;
+  }
 }
