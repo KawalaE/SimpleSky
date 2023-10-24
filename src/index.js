@@ -1,4 +1,4 @@
-import { createFavicon, createSearchBar, crateUnitButtons } from "./modules/ui";
+import { createFavicon, createSearchBar, crateUnitButtons, createFooter } from "./modules/ui";
 import { searchBarHandler, unitHandler, createLoader } from "./modules/logic";
 
 createFavicon();
@@ -16,3 +16,4 @@ if (storageUnit === "fahrenheit") {
 }
 searchBarHandler(storageUnit, storageSpeed);
 unitHandler();
+createFooter()

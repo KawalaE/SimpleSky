@@ -17,7 +17,9 @@
 }
 body{
   height: 100vh;
-  background: linear-gradient(41deg, rgba(0,0,0,1) 0%, rgba(40,41,43,1) 89%, rgba(52,58,60,1) 100%);
+  display: flex;
+  flex-direction: column;
+  background: rgb(27, 27, 27);
   align-items: center;
 }
 .page{
@@ -214,4 +216,26 @@ button.search img{
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+.footer-name{
+  color: white;
+  font-weight: bold;
+}
+.footer img{
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  transition:.5s ease-in-out;
+}
+.footer img:hover{
+  transform: rotate(360deg) scale(1.1);
+}
+.footer{
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top:auto;
+  margin-bottom: 10px;
+}
+@media all and (max-width: 590px){
 }

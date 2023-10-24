@@ -8,6 +8,7 @@ import Magnifier from "../assets/pictures/magnifier.svg";
 import Delete from "../assets/pictures/delete.svg";
 import LeftArrow from "../assets/pictures/left-arrow.svg";
 import RightArrow from "../assets/pictures/right-arrow.svg";
+import GithubIcon from "../assets/pictures/github-mark-white.svg";
 
 const cloudRaining = new Image();
 cloudRaining.src = CloudRain;
@@ -24,6 +25,9 @@ leftArrow.src = LeftArrow;
 const rightArrow = new Image();
 rightArrow.src = RightArrow;
 
+const githubIcon = new Image();
+githubIcon.src = GithubIcon;
+
 const mphConstant = 0.621371192;
 
 const page = document.createElement("div");
@@ -36,19 +40,7 @@ const weekdays = [
   "Friday",
   "Saturday",
 ];
-export function pageLoader() {
-  const mainForecast = document.querySelector(".main-forecast");
-  const carousel = document.querySelector(".carousel");
-  document.onreadystatechange = function () {
-    if (document.readyState !== "complete") {
-      mainForecast.style.visibility = "hidden";
-      carousel.style.visibility = "hidden";
-    } else {
-      mainForecast.style.visibility = "visible";
-      carousel.style.visibility = "visible";
-    }
-  } 
-}
+
 export function createFavicon() {
   const head = document.querySelector("head");
   const favicon = document.createElement("link");
@@ -180,7 +172,7 @@ function mainAnimatedForecast(weatherDiv, weatherData, unit) {
   nightTemp.classList.add("night-temp");
   nightSide.appendChild(nightTemp);
 }
-function createCarousel(weatherData, unit) {
+function createCarousel(weatherData, unit, number) {
   const carousel = document.createElement("div");
   carousel.classList.add("carousel");
   page.append(carousel);
@@ -203,7 +195,7 @@ function createCarousel(weatherData, unit) {
   carousel.append(slideList);
   for (let i = 1; i < 7; i++) {
     const listElement = document.createElement("div");
-    if (i <= 3) {
+    if (i <= number) {
       listElement.classList.add("data-active");
     }
     const weekDay = document.createElement("p");
@@ -245,7 +237,32 @@ export function displayMainForecast(city, weatherData, unit) {
   mainCityDate(mainForecastTitle, weatherData, city, unitSymbol);
   mainAnimatedForecast(weatherInfoConatiner, weatherData, unitSymbol);
   mainSideForecast(weatherInfoConatiner, weatherData, unitSymbol);
-  createCarousel(weatherData, unitSymbol, unitSymbol);
+  const windowWidth = window.innerWidth;
+  let number;
+  if (windowWidth <= 590) number = 1;
+  if (windowWidth > 590) number = 3;
+  createCarousel(weatherData, unitSymbol, number);
+  window.addEventListener("resize", () => {
+    const numOfSlides = document.querySelectorAll(".data-active");
+    console.log(numOfSlides)
+    if (
+      window.innerWidth < 590 &&
+      window.innerWidth > 400 &&
+      numOfSlides.length !== 2
+    ) {
+      const currentCarousel = document.querySelector(".carousel");
+      currentCarousel.remove();
+      createCarousel(weatherData, unitSymbol, 2);
+    } else if (window.innerWidth >= 590 && numOfSlides.length !== 3) {
+      const currentCarousel = document.querySelector(".carousel");
+      currentCarousel.remove();
+      createCarousel(weatherData, unitSymbol, 3);
+    } else if (window.innerWidth < 400 && numOfSlides.length === 2) {
+      const currentCarousel = document.querySelector(".carousel");
+      currentCarousel.remove();
+      createCarousel(weatherData, unitSymbol, 1);
+    }
+  });
   console.log(city);
   console.log(weatherData[0]);
 }
@@ -256,4 +273,19 @@ export function removePreviousForecast() {
     mainForecast.remove();
     carouselForecast.remove();
   }
+}
+export function createFooter() {
+  const footer = document.createElement("div");
+  footer.classList.add("footer");
+  const name = document.createElement("p");
+  name.classList.add("footer-name");
+  name.textContent = "KawalaE";
+  const icon = document.createElement("img");
+  icon.src = githubIcon.src;
+  footer.append(name, icon);
+  document.body.appendChild(footer);
+
+  icon.addEventListener("click", () => {
+    window.location = "https://github.com/KawalaE/SimpleSky";
+  });
 }
