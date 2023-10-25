@@ -240,15 +240,16 @@ export function displayMainForecast(city, weatherData, unit) {
   mainSideForecast(weatherInfoConatiner, weatherData, unitSymbol);
   const windowWidth = window.innerWidth;
   let number;
-  if (windowWidth <= 590) number = 1;
-  if (windowWidth > 590) number = 3;
+  if (windowWidth < 590 && windowWidth > 420) number = 2;
+  if (windowWidth >= 590) number = 3;
+  if (windowWidth <= 420) number = 1;
   createCarousel(weatherData, unitSymbol, number);
   window.addEventListener("resize", () => {
     const numOfSlides = document.querySelectorAll(".data-active");
     console.log(numOfSlides);
     if (
       window.innerWidth < 590 &&
-      window.innerWidth > 400 &&
+      window.innerWidth > 420 &&
       numOfSlides.length !== 2
     ) {
       const currentCarousel = document.querySelector(".carousel");
@@ -258,7 +259,7 @@ export function displayMainForecast(city, weatherData, unit) {
       const currentCarousel = document.querySelector(".carousel");
       currentCarousel.remove();
       createCarousel(weatherData, unitSymbol, 3);
-    } else if (window.innerWidth < 400 && numOfSlides.length === 2) {
+    } else if (window.innerWidth < 420 && numOfSlides.length === 2) {
       const currentCarousel = document.querySelector(".carousel");
       currentCarousel.remove();
       createCarousel(weatherData, unitSymbol, 1);

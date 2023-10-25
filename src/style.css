@@ -91,7 +91,7 @@ button.search img{
   width: 20px;
 }
 .main-forecast{
-  max-width: 500px;
+  max-width: 600px;
   display: flex;
   flex-direction: column;
 }
@@ -259,15 +259,21 @@ button.search img{
     padding-top: 20px;
   }
   .search-container{
-    width: 250px;
+    width: 230px;
   }
   .search{
-    width: 150px;
+    width: 130px;
   }
   *{
     font-size: 14.5px;
   }
   .footer{
-    margin-top: 40px;
+    margin-top: 60px;
+  }
+  .search-temp{
+    margin-top: 20px;
+  }
+  .pos-rain, .humidity, .wind-speed{
+    text-align: center;
   }
 }
