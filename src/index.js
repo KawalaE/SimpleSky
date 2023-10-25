@@ -16,4 +16,4 @@ if (storageUnit === "fahrenheit") {
 }
 searchBarHandler(storageUnit, storageSpeed);
 unitHandler();
-createFooter()
+createFooter();

@@ -116,21 +116,18 @@ function mainCityDate(forecastDiv, weatherData, city, unit) {
 function mainSideForecast(weatherDiv, weatherData, unit) {
   const addInfo = document.createElement("div");
   weatherDiv.appendChild(addInfo);
-  //percip
   addInfo.classList.add("add-info");
   const possibleRain = document.createElement("p");
   possibleRain.classList.add("pos-rain");
   possibleRain.innerText = `Rain: ${weatherData[0].getPrecipitation()} %`;
   addInfo.appendChild(possibleRain);
-  //rain sum
   const humidity = document.createElement("p");
   humidity.classList.add("humidity");
   humidity.innerText = `Humidity: ${weatherData[0].getCurrentHumidity()} %`;
   addInfo.appendChild(humidity);
-  //windspeed sum
   const windspeedMax = document.createElement("p");
   windspeedMax.classList.add("wind-speed");
-  if(unit === "°C"){
+  if (unit === "°C") {
     windspeedMax.innerText = `Wind: ${weatherData[0].getWindspeed()} km/h`;
   } else {
     windspeedMax.innerText = `Wind: ${
@@ -148,26 +145,22 @@ function mainAnimatedForecast(weatherDiv, weatherData, unit) {
   nightSide.classList.add("night-side");
   const weatherAnimations = document.createElement("div");
   weatherAnimations.append(daySide, nightSide);
-  weatherAnimations.classList.add('weather-animations');
+  weatherAnimations.classList.add("weather-animations");
   weatherDiv.append(weatherAnimations);
-  //day animation display
   const dayAnimation = document.createElement("div");
   const dayImg = document.createElement("img");
   dayImg.src = getImage(weatherData[0].getWeatherCode())[0];
   dayAnimation.appendChild(dayImg);
   daySide.appendChild(dayAnimation);
-  //night animation display
   const nightAnimation = document.createElement("div");
   const nightImg = document.createElement("img");
   nightImg.src = getImage(weatherData[0].getWeatherCode())[1];
   nightAnimation.appendChild(nightImg);
   nightSide.appendChild(nightAnimation);
-  //temperature day
   const dayTemp = document.createElement("p");
   dayTemp.innerText = `${weatherData[0].getMaxTemp()} ${unit}`;
   dayTemp.classList.add("day-temp");
   daySide.appendChild(dayTemp);
-  //temperature night
   const nightTemp = document.createElement("p");
   nightTemp.innerText = `${weatherData[0].getMinTemp()} ${unit}`;
   nightTemp.classList.add("night-temp");
@@ -246,7 +239,6 @@ export function displayMainForecast(city, weatherData, unit) {
   createCarousel(weatherData, unitSymbol, number);
   window.addEventListener("resize", () => {
     const numOfSlides = document.querySelectorAll(".data-active");
-    console.log(numOfSlides);
     if (
       window.innerWidth < 590 &&
       window.innerWidth > 420 &&
@@ -265,8 +257,6 @@ export function displayMainForecast(city, weatherData, unit) {
       createCarousel(weatherData, unitSymbol, 1);
     }
   });
-  console.log(city);
-  console.log(weatherData[0]);
 }
 export function removePreviousForecast() {
   const mainForecast = document.querySelector(".main-forecast");
