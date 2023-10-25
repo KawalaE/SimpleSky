@@ -36,7 +36,10 @@ function getCurrentUnit(unitStr) {
 }
 export function searchBarHandler(unit) {
   const searchValue = document.querySelector("input[class='search']");
-  const storageVal = localStorage.getItem("city") || "New York";
+  const storageVal = localStorage.getItem("city")
+    ? localStorage.getItem("city")
+    : "New York";
+  console.log(storageVal)
   currentCity = searchValue.value ? searchValue.value : storageVal;
   if (!searchValue.value) {
     weatherHandler(currentCity, unit);

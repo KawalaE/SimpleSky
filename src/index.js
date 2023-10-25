@@ -5,8 +5,8 @@ createFavicon();
 createSearchBar();
 createLoader();
 crateUnitButtons();
-const storageUnit = localStorage.getItem("unit");
-const storageSpeed = localStorage.getItem("speed");
+const storageUnit = localStorage.getItem("unit") || "celsius";
+const storageSpeed = localStorage.getItem("speed") || "kmh";
 if (storageUnit === "fahrenheit") {
   document.querySelector(".celsius-btn").classList.remove("unit-current");
   document.querySelector(".fahrenheit-btn").classList.add("unit-current");
