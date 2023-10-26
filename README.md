@@ -29,7 +29,7 @@ SimpleSky is a web forecast app I created using `JavaScript`, `HTML`, and `CSS`.
 ---
 
 ![image](https://github.com/KawalaE/SimpleSky/assets/112077671/e71971ce-1ae5-47b5-825b-b2d69ea2d4c2)
-![1](https://github.com/KawalaE/SimpleSky/assets/112077671/a33cbfd6-ad37-4ddd-90d2-053d08e97da1)
-![2](https://github.com/KawalaE/SimpleSky/assets/112077671/2203bf45-1213-493d-aea3-6a976d0fa213)
+
+![unnamed](https://github.com/KawalaE/SimpleSky/assets/112077671/ae999444-e4a6-4ee7-b9a2-25362b184e29)
 
 
