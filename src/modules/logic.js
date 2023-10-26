@@ -39,7 +39,6 @@ export function searchBarHandler(unit) {
   const storageVal = localStorage.getItem("city")
     ? localStorage.getItem("city")
     : "New York";
-  console.log(storageVal)
   currentCity = searchValue.value ? searchValue.value : storageVal;
   if (!searchValue.value) {
     weatherHandler(currentCity, unit);
