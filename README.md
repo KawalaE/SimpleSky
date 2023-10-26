@@ -33,8 +33,9 @@ SimpleSky is a web forecast app I created using `JavaScript`, `HTML`, and `CSS`.
 + Weather animations by https://github.com/basmilius/weather-icons
 
 ---
-
-![image](https://github.com/KawalaE/SimpleSky/assets/112077671/e71971ce-1ae5-47b5-825b-b2d69ea2d4c2)
+<p align="center">
+  <img src="src/assets/readme/page.gif" alt="animated" />
+</p>
 
 ![unnamed](https://github.com/KawalaE/SimpleSky/assets/112077671/ae999444-e4a6-4ee7-b9a2-25362b184e29)
 
