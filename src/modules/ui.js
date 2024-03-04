@@ -88,7 +88,7 @@ export function crateUnitButtons() {
   unitHandler();
   themeChange();
 }
-function themeChange(){
+function themeChange() {
   const container = document.querySelector(".search-temp");
   const label = document.createElement("label");
   label.classList.add("switch");
