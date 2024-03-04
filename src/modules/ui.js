@@ -86,6 +86,50 @@ export function crateUnitButtons() {
   const searchContainer = document.querySelector(".search-temp");
   searchContainer.append(fahrenheit, celsius);
   unitHandler();
+  themeChange();
+}
+function themeChange(){
+  const container = document.querySelector(".search-temp");
+  const label = document.createElement("label");
+  label.classList.add("switch");
+  container.appendChild(label);
+
+  const input = document.createElement("input");
+  input.type = "checkbox";
+  label.appendChild(input);
+
+  const span = document.createElement("span");
+  span.classList.add("slider");
+  span.classList.add("round");
+  label.appendChild(span);
+
+  const prevTheme = localStorage.getItem("theme");
+  const sysTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
+    ? "dark-theme"
+    : "light-theme";
+
+  const currentTheme = prevTheme !== null ? prevTheme : sysTheme;
+  input.id = `${currentTheme}`;
+
+  const setDarkMode = () => {
+    document.querySelector("body").setAttribute("data-theme", "dark");
+  };
+  const setLightMode = () => {
+    document.querySelector("body").setAttribute("data-theme", "light");
+  };
+  currentTheme === "dark-theme" ? setDarkMode() : setLightMode();
+
+  input.addEventListener("change", (e) => {
+    if (e.target.id === "dark-theme") {
+      localStorage.setItem("theme", "light-theme");
+      e.target.id = "light-theme";
+      setLightMode();
+    } else {
+      localStorage.setItem("theme", "dark-theme");
+      e.target.id = "dark-theme";
+      setDarkMode();
+    }
+  });
 }
 function parseCityName(city) {
   const cityArr = city.split(" ");

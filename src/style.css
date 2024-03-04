@@ -7,6 +7,33 @@
 
 :root{
   --primary-blue: #30a0e0;
+  --body-background: rgb(27, 27, 27);
+  --main-font: white;
+  --secondary-font: rgb(133, 133, 133);
+  --accent-color: white;
+  --filter-setting: brightness(1);
+  --delete-brightness:brightness(1);
+  --end-brightness: opacity(0.1);
+  
+}
+[data-theme="dark"]{
+  --body-background: rgb(27, 27, 27);
+  --main-font: white;
+  --secondary-font: rgb(133, 133, 133);
+  --accent-color: white;
+  --filter-setting: brightness(1);
+  --delete-brightness:brightness(1);
+  --end-brightness: opacity(0.1);
+}
+
+[data-theme="light"]{
+  --body-background: : rgb(114 225 255);
+  --main-font: #2e3031;
+  --secondary-font: #929292;
+  --accent-color: #070e8fad;
+  --filter-setting: brightness(0.2);
+  --delete-brightness:brightness(0.5);
+  --end-brightness: brightness(0.6);
 }
 *, *::before, *::after{
   padding: 0;
@@ -19,7 +46,7 @@ body{
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: rgb(27, 27, 27);
+  background: var(--body-background);
   align-items: center;
 }
 .page{
@@ -33,10 +60,10 @@ body{
   background-color: transparent;
   width: 200px;
   border: none;
-  color: white;
+  color: var(--main-font);
 }
 .search-container{
-  border: 1px solid white;
+  border: 1px solid var(--main-font);
   height: 40px;
   display: flex;
   justify-content: center;
@@ -44,17 +71,17 @@ body{
   border-radius: 20px;
   width: 300px;
   gap: 10px;
-  caret-color: white;
+  caret-color: var(--main-font);
 }
 .fahrenheit-btn, .celsius-btn{
-  color: rgb(133, 133, 133);
+  color: var(--secondary-font);
   font-size: 1.5rem;
   cursor: pointer;
   background-color: transparent;
   border: none;
 }
 .unit-current{
-  color: white;
+  color: var(--accent-color);
 }
 .search-temp{
   display: flex;
@@ -74,6 +101,7 @@ button.search{
 button.search img{
   width: 20px;
   transition: 0.2s ease-in-out;
+   filter: var(--delete-brightness);
 }
 .search-container input:focus{
    outline: none;
@@ -89,6 +117,7 @@ button.search img{
 }
 .button-delete img{
   width: 20px;
+  filter: var(--delete-brightness);
 }
 .main-forecast{
   max-width: 600px;
@@ -97,9 +126,10 @@ button.search img{
 }
 .button-delete:active, button.search img:active{
   transform: scale(80%);
+  filter: var(--delete-brightness);
 }
 .city-name{
-  color: white;
+  color: var(--main-font);
   font-size: 2rem;
 }
 .day-side img, .night-side img{
@@ -116,7 +146,7 @@ button.search img{
   align-items: center;
 }
 .day-temp, .night-temp{
-  color: white;
+  color: var(--main-font);
   font-size: 1.3rem;
 }
 .add-info{
@@ -126,12 +156,12 @@ button.search img{
   gap: 10px;
 }
 .pos-rain, .humidity, .wind-speed, .current-temp{
-  color: white;
+  color: var(--accent-color);
   font-size: 1.1rem;
 }
 .main-date{
   font-size: 1.3rem;
-  color: rgb(133, 133, 133);
+  color: var(--secondary-font);
 }
 .main-title{
   display: flex;
@@ -175,13 +205,14 @@ button.search img{
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: white;
+  color: var(--main-font);
 }
 .carousel-button-prev, .carousel-button-next{
   background-color: transparent;
   height: 50px;
   border: none;
   cursor: pointer;
+  filter: var(--filter-setting);
 }
 .carousel-button-prev:hover, .carousel-button-next:hover{
   transform: scale(120%);
@@ -190,13 +221,13 @@ button.search img{
   width: 50px;
 }
 .end{
-  filter: opacity(0.5);
+  filter: var(--end-brightness);
   pointer-events: none;
   cursor: default;
 }
 .slide-temp{
   display: flex;
-  color: white;
+  color: var(--main-font);
   gap: 18px;
 }
 .slide-temp p{
@@ -222,7 +253,7 @@ button.search img{
   100% { transform: rotate(360deg); }
 }
 .footer-name{
-  color: white;
+  color: var(--main-font);
   font-weight: bold;
 }
 .footer img{
@@ -230,6 +261,7 @@ button.search img{
   height: 25px;
   cursor: pointer;
   transition:.5s ease-in-out;
+  filter: var(--delete-brightness);
 }
 .footer img:hover{
   transform: rotate(360deg) scale(1.1);
@@ -276,4 +308,68 @@ button.search img{
   .pos-rain, .humidity, .wind-speed{
     text-align: center;
   }
+}
+
+/*theme change button styles*/
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 25px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #7c7c7c;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 17px;
+  width: 17px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #509edd;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #509edd;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
 }

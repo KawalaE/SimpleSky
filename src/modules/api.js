@@ -21,6 +21,9 @@ async function getLatLong(city) {
 async function getWeather(latitude, longitude, timezone, unit) {
   const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&timezone=${timezone}&temperature_unit=${unit}&daily=weathercode,temperature_2m_max,temperature_2m_min,rain_sum,precipitation_probability_mean,windspeed_10m_max`;
   const response = await fetch(url, { mode: "cors" });
+  if (response.status === 400) {
+    window.location.reload();
+  }
   const data = await response.json();
   const url1 = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&temperature_unit=${unit}&hourly=temperature_2m,weathercode,relativehumidity_2m`;
   const response1 = await fetch(url1, { mode: "cors" });
